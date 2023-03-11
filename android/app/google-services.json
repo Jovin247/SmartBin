@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1042467963941",
+    "project_id": "smart-e-waste",
+    "storage_bucket": "smart-e-waste.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042467963941:android:6bbe0c524c5d9024922bcc",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042467963941-hpma6r9nptaa04p9l5sc0ilcehumbd50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSYT1kKtPQIeUq8J-hJijcnBGG31-2yUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042467963941-hpma6r9nptaa04p9l5sc0ilcehumbd50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
