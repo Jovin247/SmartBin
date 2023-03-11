@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-void main() => runApp(const MyApp());
+import './auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
 
   // static const String _title = 'Sample App';
 
@@ -31,7 +33,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical:100),
+      padding: const EdgeInsets.symmetric(vertical: 100),
       child: Padding(
           padding: const EdgeInsets.all(10),
           child: ListView(
@@ -42,8 +44,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   child: const Text(
                     'Login',
                     style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.blue,
+                      fontSize: 20,
+                      color: Colors.blue,
                     ),
                   )),
               Container(
@@ -71,7 +73,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 onPressed: () {
                   //forgot password screen
                 },
-                child: const Text('Forgot Password',),
+                child: const Text(
+                  'Forgot Password',
+                ),
               ),
               Container(
                   height: 50,
@@ -82,8 +86,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       // print(nameController.text);
                       // print(passwordController.text);
                     },
-                  )
-              ),
+                  )),
               Row(
                 // ignore: sort_child_properties_last
                 children: <Widget>[
@@ -99,7 +102,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   )
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
-               ),
+              ),
               Container(
                   height: 45,
                   padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
@@ -111,13 +114,32 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       'Sign in using Google',
                       style: TextStyle(color: Colors.blue),
                     ),
-                    onPressed: () {
-
+                    onPressed: () async {
+                      await signInWithGoogle();
+                      setState(() {
+                        
+                      });
                     },
-                  )
-              )
+                  ))
             ],
           )),
     );
   }
+}
+
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+
+  // Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
 }
