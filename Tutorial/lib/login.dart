@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/map.dart';
+import 'package:myapp/qr.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -118,6 +120,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         style: TextStyle(color: Colors.blue),
                       ),
                       onPressed: () {
+                        QR_run();
                       },
                     )
                 )
