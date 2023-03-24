@@ -15,7 +15,7 @@
     
     Widget build(BuildContext context) {
       return const MaterialApp(
-        title: 'Custom Marker Example',
+        title: 'SmartBin',
         home: MyMapWidget(),
       );
     }
@@ -37,13 +37,16 @@
     @override
     void initState() {
       super.initState();
-      _loadMapStyle();
       _loadMarkerImage();
     }
 
-    Future<void> _loadMapStyle() async {
-      String style = await DefaultAssetBundle.of(context).loadString('assets/map_style.json');
-      mapController.setMapStyle(style);
+    Future<String> readJson() async {
+    final String jsonString = await rootBundle.loadString('assets/map_style.json');
+      return jsonString;
+    } 
+    void _onMapCreated(GoogleMapController controller) async{
+        String jsonStr = await readJson();
+        controller.setMapStyle(jsonStr);
     }
 
     Future<void> _loadMarkerImage() async {
@@ -59,6 +62,13 @@
           Marker(
             markerId: const MarkerId("marker_1"),
             position: const LatLng(37.77423, -122.41622),
+            infoWindow: const InfoWindow(
+              title: 'San Francisco',
+              snippet: 'Welcome to San Francisco',
+            ),
+            onTap: () {
+              // Handle marker tap event
+            },
             icon: markerIcon, 
           ),
         );
@@ -67,6 +77,13 @@
           Marker(
             markerId: const MarkerId("marker_2"),
             position: const LatLng(37.77163, -122.41622),
+            infoWindow: const InfoWindow(
+              title: 'San Francisco',
+              snippet: 'Welcome to San Francisco',
+            ),
+            onTap: () {
+              // Handle marker tap event
+            },
             icon: markerIcon, 
           ),
         );
@@ -75,6 +92,13 @@
           Marker(
             markerId: const MarkerId("marker_3"),
             position: const LatLng(37.77163, -122.41942),
+            infoWindow: const InfoWindow(
+              title: 'San Francisco',
+              snippet: 'Welcome to San Francisco',
+            ),
+            onTap: () {
+              // Handle marker tap event
+            },
             icon: markerIcon, 
           ),
         );
@@ -83,6 +107,13 @@
           Marker(
             markerId: const MarkerId("marker_4"),
             position: const LatLng(37.77423, -122.41942),
+            infoWindow: const InfoWindow(
+              title: 'San Francisco',
+              snippet: 'Welcome to San Francisco',
+            ),
+            onTap: () {
+              // Handle marker tap event
+            },
             icon: markerIcon, 
           ),
         );
@@ -108,24 +139,64 @@
       }); 
     }
 
+  bool _sheetOpened = false;
+
+    void _showSheet() {
+      setState(() {
+        _sheetOpened = true;
+      });
+      showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return const SizedBox(
+              height: 100.0,
+              child: Center(
+                child: Text('Results'),                
+              ),
+            );
+          }).then((value) {
+        setState(() {
+          _sheetOpened = false;
+        });
+      });
+    }
+
     @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('SmartBin'),
-        ),
-        body: GoogleMap(
+    Widget build(BuildContext context) {   
+    return Scaffold(
+    // appBar: AppBar(
+    //   title: const Text('SmartBin'),
+    // ),
+    body: Stack(
+      children: [
+        GoogleMap(
           mapType: MapType.normal,
           initialCameraPosition: const CameraPosition(
             target: LatLng(37.77483, -122.41942),
             zoom: 16,
           ),
-          onMapCreated: (GoogleMapController controller) {
-            mapController = controller;
-          },
+          onMapCreated: _onMapCreated,
           markers: _markers,
           polylines: _polylines,
         ),
-      );
-    }
-  }
+        Positioned(
+          bottom: _sheetOpened ? 105.0 : 16.0,
+          right: 16.0,
+          child: SizedBox(
+            width: 375.0,
+            height: 65.0,
+            child: FloatingActionButton(
+              backgroundColor: Colors.black,
+              onPressed: _showSheet,
+              //child: Icon(Icons.add),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+ }
+}

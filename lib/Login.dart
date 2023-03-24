@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import './auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:myapp/signup.dart';
+import 'package:myapp/map.dart';
+import 'package:myapp/qr.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   // static const String _title = 'Sample App';
 
@@ -32,114 +34,125 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 100),
-      child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: ListView(
-            children: <Widget>[
-              Container(
-                  alignment: Alignment.center,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('SmartBin'),
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(vertical:50),
+        child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: ListView(
+              children: <Widget>[
+                Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(10),
+                    child: const Text(
+                      'Log In',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
+                      ),
+                    )),
+                Container(
                   padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.blue,
+                  child: TextField(
+                    controller: nameController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'User Name',
                     ),
-                  )),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'User Name',
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: TextField(
-                  obscureText: true,
-                  controller: passwordController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child: TextField(
+                    obscureText: true,
+                    controller: passwordController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                    ),
                   ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  //forgot password screen
-                },
-                child: const Text(
-                  'Forgot Password',
+                TextButton(
+                  onPressed: () {
+                    //forgot password screen
+                  },
+                  child: const Text('Forgot Password',),
                 ),
-              ),
-              Container(
-                  height: 50,
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: ElevatedButton(
-                    child: const Text('Login'),
-                    onPressed: () {
-                      // print(nameController.text);
-                      // print(passwordController.text);
-                    },
-                  )),
-              Row(
-                // ignore: sort_child_properties_last
-                children: <Widget>[
-                  const Text('Does not have account?'),
-                  TextButton(
-                    child: const Text(
-                      'Sign up',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () {
-                      //signup screen
-                    },
-                  )
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-              Container(
-                  height: 45,
-                  padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white, // Background color
-                    ),
-                    child: const Text(
-                      'Sign in using Google',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    onPressed: () async {
-                      await signInWithGoogle();
-                      setState(() {
-                        
-                      });
-                    },
-                  ))
-            ],
-          )),
+                Container(
+                    height: 50,
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: ElevatedButton(
+                      child: const Text('Login'),
+                      onPressed: () {
+                        map_run();
+                      },
+                    )
+                ),
+                Row(
+                  // ignore: sort_child_properties_last
+                  children: <Widget>[
+                    const Text('Does not have account?'),
+                    TextButton(
+                      child: const Text(
+                        'Sign up',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        //signup screen
+                        sign_up();
+                      },
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                Container(
+                    height: 45,
+                    padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ), // Background color
+                      ),
+                      child: const Text(
+                        'Log in using Google',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                      },
+                    )
+                  ),
+                Container(
+                    height: 50,
+                    padding: const EdgeInsets.fromLTRB(100, 10, 100, 0),
+                    // padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white, // Background color
+                      ),
+                      child: const Text(
+                          'Scan QR',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () async {
+                          final result = await Navigator.push<String>(
+                          context,
+                          MaterialPageRoute(builder: (context) => const QRScreen()),
+                        );
+                      if (result != null) {
+                        // Do something with the scan data
+                        print(result);
+                      }
+                        },
+                    )
+                ),
+              ],
+            )),
+      )
     );
   }
-}
-
-Future<UserCredential> signInWithGoogle() async {
-  // Trigger the authentication flow
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-  // Obtain the auth details from the request
-  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-  // Create a new credential
-  final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-
-  // Once signed in, return the UserCredential
-  return await FirebaseAuth.instance.signInWithCredential(credential);
 }
