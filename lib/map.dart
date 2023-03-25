@@ -34,6 +34,9 @@
     //final MarkerController _markerController = MarkerController();
     late GoogleMapController mapController;
 
+    bool _sheetOpened = false;
+    MarkerId? _selectedMarker;
+
     @override
     void initState() {
       super.initState();
@@ -66,8 +69,8 @@
               title: 'San Francisco',
               snippet: 'Welcome to San Francisco',
             ),
-            onTap: () {
-              // Handle marker tap event
+            onTap: () { // Handle marker tap event
+              _showSheet(const MarkerId("marker_1"));
             },
             icon: markerIcon, 
           ),
@@ -82,7 +85,7 @@
               snippet: 'Welcome to San Francisco',
             ),
             onTap: () {
-              // Handle marker tap event
+              _showSheet(const MarkerId("marker_2"));
             },
             icon: markerIcon, 
           ),
@@ -97,7 +100,7 @@
               snippet: 'Welcome to San Francisco',
             ),
             onTap: () {
-              // Handle marker tap event
+              _showSheet(const MarkerId("marker_3"));
             },
             icon: markerIcon, 
           ),
@@ -112,7 +115,7 @@
               snippet: 'Welcome to San Francisco',
             ),
             onTap: () {
-              // Handle marker tap event
+              _showSheet(const MarkerId("marker_4"));
             },
             icon: markerIcon, 
           ),
@@ -139,9 +142,7 @@
       }); 
     }
 
-  bool _sheetOpened = false;
-
-    void _showSheet() {
+    void _showSheet(MarkerId markerId) {
       setState(() {
         _sheetOpened = true;
       });
@@ -187,7 +188,14 @@
             height: 65.0,
             child: FloatingActionButton(
               backgroundColor: Colors.black,
-              onPressed: _showSheet,
+              onPressed: () {
+                if (_sheetOpened) {
+                Navigator.of(context).pop();
+                setState(() {
+                _sheetOpened = false;
+                });
+                }
+                },
               //child: Icon(Icons.add),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
