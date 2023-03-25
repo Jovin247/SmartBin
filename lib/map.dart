@@ -35,7 +35,7 @@
     late GoogleMapController mapController;
 
     bool _sheetOpened = false;
-    MarkerId? _selectedMarker;
+    //MarkerId? _selectedMarker;
 
     @override
     void initState() {
@@ -135,7 +135,7 @@
             polylineId: const PolylineId("marker_polyline"),
             points: polylineCoordinates,
             color: Colors.blue,
-            width: 10,
+            width: 5,
           ),
         );
 

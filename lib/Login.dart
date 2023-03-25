@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/signup.dart';
-import 'package:myapp/map.dart';
-import 'package:myapp/qr.dart';
+import 'package:SmartBin/signup.dart';
+import 'package:SmartBin/map.dart';
+import 'package:SmartBin/qr.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const Log_in());
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+// ignore: camel_case_types
+class Log_in extends StatelessWidget {
+  const Log_in({Key? key}) : super(key: key);
 
   // static const String _title = 'Sample App';
 
@@ -145,6 +146,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         );
                       if (result != null) {
                         // Do something with the scan data
+                        // ignore: avoid_print
                         print(result);
                       }
                         },
