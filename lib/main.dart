@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/login.dart';
+import 'package:SmartBin/login.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Log_in());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SmartBin extends StatelessWidget {
+  const SmartBin({super.key});
 
   // This widget is the root of your application.
   @override

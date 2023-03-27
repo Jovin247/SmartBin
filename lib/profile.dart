@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:SmartBin/signup.dart';
-import 'package:SmartBin/map.dart';
-import 'package:SmartBin/qr.dart';
 
-void main() => runApp(const Log_in());
+// ignore: non_constant_identifier_names
+void user_profile() => runApp(const Profile());
 
 // ignore: camel_case_types
-class Log_in extends StatelessWidget {
-  const Log_in({Key? key}) : super(key: key);
-
-  // static const String _title = 'Sample App';
+class Profile extends StatelessWidget {
+  const Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +45,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
                     child: const Text(
-                      'Log In',
+                      'Profile',
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.blue,
+                          color: Colors.black,
                       ),
                     )),
                 Container(
@@ -88,7 +84,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     child: ElevatedButton(
                       child: const Text('Login'),
                       onPressed: () {
-                        map_run();
+                        //map_run();
                       },
                     )
                 ),
@@ -103,54 +99,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ),
                       onPressed: () {
                         //signup screen
-                        sign_up();
+                       // sign_up();
                       },
                     )
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
-                ),
-                Container(
-                    height: 45,
-                    padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ), // Background color
-                      ),
-                      child: const Text(
-                        'Log in using Google',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      onPressed: () {
-                      },
-                    )
-                  ),
-                Container(
-                    height: 50,
-                    padding: const EdgeInsets.fromLTRB(100, 10, 100, 0),
-                    // padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white, // Background color
-                      ),
-                      child: const Text(
-                          'Scan QR',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      onPressed: () async {
-                          final result = await Navigator.push<String>(
-                          context,
-                          MaterialPageRoute(builder: (context) => const QRScreen()),
-                        );
-                      if (result != null) {
-                        // Do something with the scan data
-                        // ignore: avoid_print
-                        print(result);
-                      }
-                        },
-                    )
                 ),
               ],
             )),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/map.dart';
+import 'package:SmartBin/map.dart';
 
 // ignore: non_constant_identifier_names
 void sign_up() => runApp(const MyApp());
