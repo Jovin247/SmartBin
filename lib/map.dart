@@ -3,6 +3,7 @@
   import 'package:flutter/material.dart';
   import 'package:flutter/services.dart';
   import 'package:google_maps_flutter/google_maps_flutter.dart';
+  import 'package:SmartBin/profile.dart';
   
   void map_run() {
     runApp(const Map());
@@ -189,12 +190,13 @@
             child: FloatingActionButton(
               backgroundColor: Colors.black,
               onPressed: () {
-                if (_sheetOpened) {
-                Navigator.of(context).pop();
-                setState(() {
-                _sheetOpened = false;
-                });
-                }
+                user_profile();
+                // if (_sheetOpened) {
+                // Navigator.of(context).pop();
+                // setState(() {
+                // _sheetOpened = false;
+                // });
+                // }
                 },
               //child: Icon(Icons.add),
               shape: RoundedRectangleBorder(
