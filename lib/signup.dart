@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_bin/login.dart';
 import 'package:smart_bin/map.dart';
-
+import 'package:smart_bin/register_users.dart';
 // ignore: non_constant_identifier_names
 void sign_up() => runApp(const MyApp());
 
@@ -28,6 +28,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _isRegistered = false;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +120,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         child: Text('Sign Up'),
                       ),
                       onPressed: () {
-                        map_run();
+                        const MapScreen();
                       },
                     ),
                 ),
@@ -144,9 +145,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       width: 35,
                       height: 40,
                     ),
-                    onPressed: () {
-                      // Do something when the button is pressed
-                    },
+                    onPressed: () async {
+                          _isRegistered = await registerWithGoogle();
+                          if(_isRegistered == true){
+                                 const MapScreen();
+                          }
+                        },
                   ),
                 ),
                 Align(

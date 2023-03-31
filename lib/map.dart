@@ -6,12 +6,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_bin/profile.dart';
 import 'package:smart_bin/qr.dart';
 
-void map_run() {
-  runApp(const Map());
-}
 
-class Map extends StatelessWidget {
-const Map({super.key});
+
+class MapScreen extends StatelessWidget {
+const MapScreen({super.key});
 
   @override
   

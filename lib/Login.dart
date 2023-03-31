@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_bin/signup.dart';
 import 'package:smart_bin/map.dart';
+import 'package:smart_bin/auth.dart';
 
 // ignore: non_constant_identifier_names
 void log_in() => runApp(const login());
@@ -107,7 +108,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         child: Text('Sign In'),
                       ),
                       onPressed: () {
-                        map_run();
+                       const MapScreen();
                       },
                     ),
                 ),
@@ -132,7 +133,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       width: 35,
                       height: 40,
                     ),
-                    onPressed: () {
+                    onPressed: () async{
+                      bool success = await signInWithGoogle();
+                        if (success) {
+                          // Sign-in succeeded, run the map_run() function
+                          const MapScreen();
+                        } else {
+                          // Sign-in failed, display an error message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Failed to sign in with Google')),
+                          );
+                        }
                     },
                   ),
                 ),
