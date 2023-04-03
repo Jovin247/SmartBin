@@ -120,7 +120,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         child: Text('Sign Up'),
                       ),
                       onPressed: () {
-                        const MapScreen();
+                        map_run();
                       },
                     ),
                 ),
@@ -148,7 +148,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     onPressed: () async {
                           _isRegistered = await registerWithGoogle();
                           if(_isRegistered == true){
-                                 const MapScreen();
+                                 map_run();
                           }
                         },
                   ),

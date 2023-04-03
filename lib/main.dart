@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           return const MaterialApp(home: CircularProgressIndicator());
         } else {
           if (snapshot.hasData) {
-            return const MaterialApp(home: MapScreen());
+            return const MaterialApp(home: Map());
           } else {
             return const MaterialApp(home: login());
           }
