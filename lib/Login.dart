@@ -108,7 +108,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         child: Text('Sign In'),
                       ),
                       onPressed: () {
-                       const MapScreen();
+                       const Map();
                       },
                     ),
                 ),
@@ -137,7 +137,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       bool success = await signInWithGoogle();
                         if (success) {
                           // Sign-in succeeded, run the map_run() function
-                          const MapScreen();
+                          const Map();
                         } else {
                           // Sign-in failed, display an error message
                           ScaffoldMessenger.of(context).showSnackBar(
