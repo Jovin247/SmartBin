@@ -17,6 +17,7 @@ const Map({super.key});
   
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'SmartBin',
       home: MyMapWidget(),
     );
@@ -419,47 +420,44 @@ void _showSheet(MarkerId markerId) {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top:16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 70),
-                      child: Image.asset(
-                        'assets/google.png',
-                        width: 80.0,
-                        height: 40.0,
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 70),
+                    child: Image.asset(
+                      'assets/iconB.png',
+                      width: 120.0,
+                      height: 60.0,
                     ),
-                    SizedBox(
-                      height: 40,
-                      width: 130,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right:50.0),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          ),  
-                          child: const Align(
-                            alignment: Alignment.center,
-                            child: Text('Report'),
-                          ),
-                          onPressed: () {
-                            
-                          },
+                  ),
+                  SizedBox(
+                    height: 30,
+                    width: 130,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right:50.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        ),  
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: Text('Report'),
                         ),
+                        onPressed: () {
+                          
+                        },
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
                         iconSize: 100,
@@ -527,41 +525,45 @@ void _showSheet(MarkerId markerId) {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(left: 30),
-                        child: Icon(Icons.person, color: Colors.white),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 20),
-                          child: Text(
-                            'John Doe',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
+                  child: ListTile(
+                        title: Row(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    "https://images.unsplash.com/photo-1678188575046-4cad367dd8df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"),
+                              ),
                             ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 70.0,
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: Text(
-                            '45',
-                            style: TextStyle(
-                              color: Colors.yellow,
-                              fontSize: 16.0,
+                            SizedBox(
+                              width: 150,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: Text("Ariana Garb", style: TextStyle(color: Colors.white, fontSize: 18)),
+                            )
                             ),
-                          ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "45",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.yellow,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Image.asset(
+                              "assets/icon2.png",
+                              height: 30,
+                              width: 30,
+                            ),
+                          ],
+                        ),        
+                      )
                 ),
               ),
             ),

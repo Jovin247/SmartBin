@@ -7,11 +7,13 @@ import 'package:smart_bin/map.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: SmartBin(),));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class SmartBin extends StatelessWidget {
+  const SmartBin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +21,17 @@ class MyApp extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const MaterialApp(home: CircularProgressIndicator());
+          return const MaterialApp(
+            home: CircularProgressIndicator());
         } else {
           if (snapshot.hasData) {
-            return const MaterialApp(home: Map());
+            return const MaterialApp(
+
+              home: Map());
           } else {
-            return const MaterialApp(home: login());
+            return const MaterialApp(
+
+              home: login());
           }
         }
       },

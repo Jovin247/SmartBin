@@ -66,9 +66,12 @@ flutter:
   assets:
     - assets/map_style.json
     - assets/bin.png
-    - assets/bin1.png
     - assets/google.png
     - assets/qr.png
+    - assets/logo.png
+    - assets/icon.png
+    - assets/icon2.png
+    - assets/iconB.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
